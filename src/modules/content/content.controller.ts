@@ -1,23 +1,35 @@
-import { Controller, Get, Post, Put, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ContentService } from './content.service';
+import { CreateContentDto } from './Dto/create-content.dto';
+import { ResponsContentDto } from './Dto/response-content.dto';
+import { UpdateContentDto } from './Dto/update-content.dto';
 
 @Controller('content')
 export class ContentController {
+  constructor(private contentservice: ContentService) {}
+  @Get()
+  showAllContent(): Promise<ResponsContentDto[]> {
+    return this.contentservice.showAllContent();
+  }
 
-    constructor(private contentservice: ContentService){}
-    @Get()
-    showAllContent(){}
+  @Get(':id')
+  showOneContent(@Param('id') id:number): Promise<ResponsContentDto> {
+    return this.contentservice.showOneContent(id);
+  }
 
-    @Get(':id')
-    showOneContent(){}
+  @Post()
+  async createContent(
+    @Body() data: CreateContentDto ): Promise<ResponsContentDto> {
+    return this.contentservice.create(data);
+  }
 
-    @Post()
-    createContent(){}
+  @Put(':id')
+  updateContent(@Param('id') id:number, @Body() data: UpdateContentDto ) {
+      return this.contentservice.update(id,data)
+  }
 
-    @Put(':id')
-    updateContent(){}
-
-    @Delete('id')
-    deleteContent(){}
-
+  @Delete(':id')
+  deleteContent(@Param('id') id:number) {
+      return this.contentservice.delete(id)
+  }
 }
