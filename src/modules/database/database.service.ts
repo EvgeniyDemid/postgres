@@ -12,11 +12,11 @@ export class DatabaseService implements TypeOrmOptionsFactory  {
     createTypeOrmOptions(): TypeOrmModuleOptions {
        return {
         type: 'postgres',
-        host: this.configService.get('DATABASE_HOST') || 'host',
+        host: this.configService.get('DATABASE_HOST') || 'localhost',
         port: this.configService.get<number>('DATABASE_PORT') || 5432,
-        username: this.configService.get('DATABASE_USER') || 'user',
-        password: this.configService.get('DATABASE_PASSWORD') || 'password',
-        database: this.configService.get('DATABASE') || 'database',
+        username: this.configService.get('DATABASE_USER') || 'postgres',
+        password: this.configService.get('DATABASE_PASSWORD') || '1902',
+        database: this.configService.get('DATABASE') || 'postgres',
         synchronize: true,
         logging: true,
         entities: ["dist/**/*.entity{.ts,.js}"],
