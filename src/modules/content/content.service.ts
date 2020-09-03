@@ -1,33 +1,47 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ContentEntity } from './entities.ts/comtent.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateContentDto } from './Dto/create-content.dto';
-import {merge} from 'lodash'
+import {merge} from 'lodash';
 
 @Injectable()
 export class ContentService {
     constructor (@InjectRepository(ContentEntity) private contentRepository: Repository<ContentEntity>){}
     
     async showAllContent(){
-        return await this.contentRepository.find();
+        return await this.contentRepository.find(
+            {select:['id', "avtor"]}
+        );
     }
-
     async showOneContent(id: number){
-        return await this.contentRepository.findOne({where:{id}});
+    const content= await this.contentRepository.findOne({where:{id}},);
+    if(!content){
+        throw new HttpException('Not found', HttpStatus.NOT_FOUND)
+    }
+    return content;
     }
 
     async create(data: CreateContentDto){
-        return this.contentRepository.save(data)
+        const content = await this.contentRepository.save(data);
+        const {discription, ...result } = content;
+        return result;
     }
 
     async update(id:number, data: CreateContentDto){
        const content = await this.contentRepository.findOne({where:{id}});
-       merge(content, data) ;
-       return this.contentRepository.save(content)
+       if(!content){
+        throw new HttpException('Not found', HttpStatus.NOT_FOUND)
+    }   merge(content, data) ;
+       await this.contentRepository.save(content);
+       return content 
     }
 
     async delete(id: number){
+        const content = await this.contentRepository.findOne({where:{id}});
+        if(!content){
+         throw new HttpException('Not found', HttpStatus.NOT_FOUND)
+        }
         await this.contentRepository.delete({ id })
          return { delete : true}
     }

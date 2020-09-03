@@ -11,7 +11,6 @@ export class ContentController {
   showAllContent(): Promise<ResponsContentDto[]> {
     return this.contentservice.showAllContent();
   }
-
   @Get(':id')
   showOneContent(@Param('id') id:number): Promise<ResponsContentDto> {
     return this.contentservice.showOneContent(id);

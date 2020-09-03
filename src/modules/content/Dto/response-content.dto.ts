@@ -9,8 +9,4 @@ export class ResponsContentDto extends PrimaryRowDto {
     @IsNotEmpty()
     @IsString()
     avtor:string;
-    
-    @IsNotEmpty()
-    @IsString()
-    discription: string;
 }
