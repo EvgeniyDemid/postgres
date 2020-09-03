@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { CreateContentDto } from './Dto/create-content.dto';
 import { ResponsContentDto } from './Dto/response-content.dto';
@@ -12,7 +12,7 @@ export class ContentController {
     return this.contentservice.showAllContent();
   }
   @Get(':id')
-  showOneContent(@Param('id') id:number): Promise<ResponsContentDto> {
+  showOneContent(@Param('id',ParseIntPipe) id:number): Promise<ResponsContentDto> {
     return this.contentservice.showOneContent(id);
   }
 
@@ -23,12 +23,12 @@ export class ContentController {
   }
 
   @Put(':id')
-  updateContent(@Param('id') id:number, @Body() data: UpdateContentDto ) {
+  updateContent(@Param('id',ParseIntPipe) id:number, @Body() data: UpdateContentDto ) {
       return this.contentservice.update(id,data)
   }
 
   @Delete(':id')
-  deleteContent(@Param('id') id:number) {
+  deleteContent(@Param('id',ParseIntPipe) id:number) {
       return this.contentservice.delete(id)
   }
 }
