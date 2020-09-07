@@ -7,9 +7,9 @@ const port = process.env.PORT || 8080
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.useGlobalPipes(new ValidationPipe({
-  //   whitelist: true,
-  // }));
+  app.useGlobalPipes(new ValidationPipe({
+    whitelist: true,
+  }));
   await app.listen(port);
   Logger.log(`Server running on http://localhost:${port}`, "Bootstrap")
 }

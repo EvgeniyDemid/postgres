@@ -13,10 +13,11 @@ import { HttpErrorFilter } from './shared/errors/http-error-filter';
     ContentModule
   ],
   controllers: [],
-providers: [{
-  provide: APP_FILTER,
-  useClass: HttpErrorFilter
-}
+providers: [
+//   {
+//   provide: APP_FILTER,
+//   useClass: HttpErrorFilter
+// }
 ],
 })
 export class AppModule {}
