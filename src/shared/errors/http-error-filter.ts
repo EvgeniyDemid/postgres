@@ -7,13 +7,15 @@ export class HttpErrorFilter implements ExceptionFilter {
         const request = ctx.getRequest();
         const response = ctx.getResponse();
         const status = exception.getStatus();
-
+        const error:any= exception.getResponse();
+        
+        console.log(ctx.getRequest())
         const errorResponse = {
             code: status,
             timestamp: new Date().toLocaleDateString(),
             path: request.url,
             method: request.method,
-            message: exception.message            
+            message: error.message            
         }
         Logger.error(
             `${request.method} ${request.url}`,

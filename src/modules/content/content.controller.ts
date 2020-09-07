@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, ParseIntPipe, Logger, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ContentService } from './content.service';
 import { CreateContentDto } from './Dto/create-content.dto';
 import { ResponsContentDto } from './Dto/response-content.dto';
@@ -6,6 +6,7 @@ import { UpdateContentDto } from './Dto/update-content.dto';
 
 @Controller('content')
 export class ContentController {
+  private logger = new Logger('ContentController')
   constructor(private contentservice: ContentService) {}
   @Get()
   showAllContent(): Promise<ResponsContentDto[]> {
@@ -17,8 +18,11 @@ export class ContentController {
   }
 
   @Post()
+  @UsePipes(new ValidationPipe())
   async createContent(
     @Body() data: CreateContentDto ): Promise<ResponsContentDto> {
+      this.logger.log(JSON.stringify(data))
+      
     return this.contentservice.create(data);
   }
 

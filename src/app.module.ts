@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { DatabaseModule } from './modules/database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { ContentModule } from './modules/content/content.module';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/errors/http-error-filter';
 
 
@@ -16,6 +16,7 @@ import { HttpErrorFilter } from './shared/errors/http-error-filter';
 providers: [{
   provide: APP_FILTER,
   useClass: HttpErrorFilter
-}],
+}
+],
 })
 export class AppModule {}
