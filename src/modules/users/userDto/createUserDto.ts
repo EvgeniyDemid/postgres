@@ -19,11 +19,11 @@ export class CreateUserDto {
   )
   password: string;
 
-  @IsNotEmpty({ message: 'Поле Имя обязательно для заполнения ' })
+  @IsNotEmpty({ message: 'Поле Имя обязательно для заполнения '})
   @IsString()
   firstName: string;
 
-  @IsNotEmpty({ message: 'Поле Фамилия обязательно для заполнения ' })
+  @IsNotEmpty({ message: 'Поле Фамилия обязательно для заполнения '})
   @IsString()
   lastName: string;
 

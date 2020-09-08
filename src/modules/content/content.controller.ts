@@ -18,7 +18,6 @@ export class ContentController {
   }
 
   @Post()
-  @UsePipes(new ValidationPipe())
   async createContent(
     @Body() data: CreateContentDto ): Promise<ResponsContentDto> {
       this.logger.log(JSON.stringify(data))

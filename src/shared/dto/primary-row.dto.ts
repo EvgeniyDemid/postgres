@@ -4,16 +4,16 @@ import {CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeor
 
 export class PrimaryRowDto {
   @PrimaryGeneratedColumn()
-  readonly id: number;
+  readonly id?: number;
 
   @CreateDateColumn({type: 'timestamp'})
   @Type(() => Date)
-  readonly createdAt: Date;
+  readonly createdAt?: Date;
 
 
   @UpdateDateColumn({type: 'timestamp'})
   @Type(() => Date)
-  readonly updatedAt: Date;
+  readonly updatedAt?: Date;
 }
 
   
