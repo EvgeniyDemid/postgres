@@ -37,5 +37,9 @@ export class CreateUserDto {
 
   @IsOptional()
   @IsString()
+  country: string;
+
+  @IsOptional()
+  @IsString()
   phone: string;
 }
