@@ -12,8 +12,8 @@ export class UsersService {
     private contentRepository: Repository<UserEntity>
   ) {}
 
-  async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const { password, email, ...rest } = createUserDto;
+  async create(data: CreateUserDto): Promise<UserEntity> {
+    const { password, email, ...rest } = data;
     const userByEmail = await this.contentRepository.findOne({
       where: { email },
     });
