@@ -19,4 +19,9 @@ export class UserEntity extends RowEntity<UserEntity>{
     country: string;
     @Column({nullable: true, default: null, type: 'varchar', length: 20})
     phone: string;
+
+    toResponseUser(){
+ const {id, email,firstName,lastName,address,city,country,phone,createdAt,updatedAt}=this;
+ return {id, email,firstName,lastName,address,city,country,phone,createdAt,updatedAt};
+  }
 }

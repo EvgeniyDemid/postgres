@@ -2,12 +2,12 @@ import { Controller, Post, Body, Get, ParseIntPipe, Param, Put, Delete } from '@
 import { UsersService } from './users.service';
 import { CreateUserDto } from './userDto/createUserDto';
 import { ResponsUserDto } from './userDto/responsUserDto';
-import { mapToResponseDto } from 'src/shared/function/map-to-response-dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly userService: UsersService) {}
 
+<<<<<<< HEAD
   @Post()
   async createUser(@Body() createUserDto: CreateUserDto): Promise<ResponsUserDto> {
     const user = await this.userService.create(createUserDto);
@@ -22,6 +22,17 @@ export class UsersController {
   async showOne(@Param('id',ParseIntPipe) id:number): Promise<ResponsUserDto>{
     return mapToResponseDto(ResponsUserDto,await this.userService.showOne(id)) 
   }
+=======
+ @Post()
+  async createUser (@Body()data: CreateUserDto):Promise<ResponsUserDto>{
+    const user = await this.userService.create(data);
+    return user.toResponseUser()
+ }
+ @Get()
+ showAll():Promise<ResponsUserDto[]>{
+     return this.userService.showAll()
+ }
+>>>>>>> 2b86179fcc396206fe96d9ffd8de80c423309b97
 
   @Put(':id')
   async update(@Param('id',ParseIntPipe) id:number,@Body() createUserDto: CreateUserDto): Promise<ResponsUserDto>{
