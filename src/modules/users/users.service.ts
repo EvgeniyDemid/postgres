@@ -13,15 +13,9 @@ export class UsersService {
     private userRepository: Repository<UserEntity>
   ) {}
 
-<<<<<<< HEAD
-  async create(createUserDto: CreateUserDto): Promise<UserEntity> {
-    const { password, email, ...rest } = createUserDto;
-    const userByEmail = await this.userRepository.findOne({
-=======
   async create(data: CreateUserDto): Promise<UserEntity> {
     const { password, email, ...rest } = data;
-    const userByEmail = await this.contentRepository.findOne({
->>>>>>> 2b86179fcc396206fe96d9ffd8de80c423309b97
+    const userByEmail = await this.userRepository.findOne({
       where: { email },
     });
     if (userByEmail) {
