@@ -1,29 +1,22 @@
-import {
-    IsNotEmpty,
-    IsEmail,
-    IsString,
-    Matches,
-    IsOptional,
-  } from 'class-validator';
+import { Expose } from 'class-transformer';
 import { PrimaryRowDto } from 'src/shared/dto/primary-row.dto';
-  
-  export class ResponsUserDto extends PrimaryRowDto  {
-    @IsEmail()
-    email: string;
-  
-    @IsString()
-    firstName: string;
-  
-    @IsString()
-    lastName: string;
-  
-    @IsString()
-    address: string;
-  
-    @IsString()
-    city: string;
-  
-    @IsString()
-    phone: string;
-  }
-  
+
+export class ResponsUserDto extends PrimaryRowDto {
+  @Expose()
+  email: string;
+
+  @Expose()
+  firstName: string;
+
+  @Expose()
+  lastName: string;
+
+  @Expose()
+  address: string;
+
+  @Expose()
+  city: string;
+
+  @Expose()
+  phone: string;
+}
