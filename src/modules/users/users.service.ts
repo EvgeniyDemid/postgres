@@ -32,6 +32,6 @@ export class UsersService {
   }
 
   async showAll():Promise<UserEntity[]>{
-    return this.contentRepository.find()
-  }
+   return this.contentRepository.find();
+}
 }

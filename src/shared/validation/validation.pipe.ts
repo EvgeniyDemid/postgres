@@ -6,7 +6,7 @@ import { plainToClass } from 'class-transformer';
 @Injectable()
 export class ValidationPipe implements PipeTransform<any> {
   async transform(value: any, { metatype }: ArgumentMetadata) {
-      console.log(value)
+  
     if (!metatype || !this.toValidate(metatype)) {
       return value;
     }
@@ -19,7 +19,7 @@ export class ValidationPipe implements PipeTransform<any> {
   }
 
   private toValidate(metatype: Function): boolean {
-    const types: Function[] = [String, Boolean, Number, Array, Object];
+    const types: Function[] = [];
     return !types.includes(metatype);
   }
 }
