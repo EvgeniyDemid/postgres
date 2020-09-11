@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Put } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Param, ParseIntPipe, Delete } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './userDto/createUserDto';
 import { ResponsUserDto } from './userDto/responsUserDto';
@@ -21,4 +21,16 @@ export class UsersController {
      return 
  }
 
+  @Get(':id')
+  async showOne(@Param('id',ParseIntPipe) id:number): Promise<ResponsUserDto>{
+    return mapToResponseDto(ResponsUserDto,await this.userService.showOne(id)) 
+  }
+  @Put(':id')
+  async update(@Param('id',ParseIntPipe) id:number,@Body() createUserDto: CreateUserDto ): Promise<ResponsUserDto>{
+    return mapToResponseDto(ResponsUserDto,await this.userService.update(id,createUserDto)) 
+  }
+  @Delete(':id')
+  async delete (@Param('id',ParseIntPipe) id:number): Promise<string>{
+    return await this.userService.delete(id)
+  }
 }

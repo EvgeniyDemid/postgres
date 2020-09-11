@@ -1,19 +1,20 @@
-
-import {Type} from 'class-transformer';
-import {CreateDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import { Type, Expose } from 'class-transformer';
+import {
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 export class PrimaryRowDto {
+  @Expose()
   @PrimaryGeneratedColumn()
   readonly id?: number;
-
-  @CreateDateColumn({type: 'timestamp'})
+  @Expose()
+  @CreateDateColumn({ type: 'timestamp' })
   @Type(() => Date)
   readonly createdAt?: Date;
-
-
-  @UpdateDateColumn({type: 'timestamp'})
+  @Expose()
+  @UpdateDateColumn({ type: 'timestamp' })
   @Type(() => Date)
   readonly updatedAt?: Date;
 }
-
-  

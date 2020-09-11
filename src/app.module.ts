@@ -5,6 +5,7 @@ import { ContentModule } from './modules/content/content.module';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/errors/http-error-filter';
 import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 
 @Module({
@@ -12,7 +13,8 @@ import { UsersModule } from './modules/users/users.module';
     ConfigModule.forRoot({isGlobal: true}),
     DatabaseModule,
     ContentModule,
-    UsersModule
+    UsersModule,
+    AuthModule
   ],
   controllers: [],
 providers: [
