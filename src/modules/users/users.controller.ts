@@ -12,13 +12,12 @@ export class UsersController {
  @Post()
   async createUser (@Body(new ValidationPipe())data: CreateUserDto):Promise<ResponsUserDto>{
     const user = await this.userService.create(data);
-    console.log(user)
     return mapToResponseDto(ResponsUserDto, user)
  }
  @Get()
- showAll():Promise<ResponsUserDto[]>{
-     const users= this.userService.showAll();
-     return 
+ async showAll():Promise<ResponsUserDto[]>{
+     const users= await this.userService.showAll();
+     return  users.map(user=>mapToResponseDto(ResponsUserDto, user))
  }
 
   @Get(':id')

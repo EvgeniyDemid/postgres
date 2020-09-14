@@ -67,9 +67,12 @@ export class UsersService {
 }
 
 async findByEmail(email: string): Promise<UserEntity> {
-  return this.userRepository.findOne({
+  const user = await this.userRepository.findOne({
     where: { email },
   });
+  if(!user){
+    throw new HttpException("Пользователь с таким email и password не найден ", HttpStatus.NOT_FOUND)
+  } return user
 }
 validatePassword(password: string, hash: string): boolean {
   return bcrypt.compareSync(password, hash);

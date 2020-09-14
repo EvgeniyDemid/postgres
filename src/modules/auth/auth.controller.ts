@@ -13,11 +13,11 @@ export class AuthController {
       ) {
       }
     
-      @UseGuards(AuthGuard('local'))
+     @UseGuards(AuthGuard('local'))
       @Post()
       async signIn(@Request() req: {user: IUserPayloadParams}): Promise<LoginResponseDto> {
-        const result = await this.authService.signIn(req.user);
-        return result;
+      const result = await this.authService.signIn(req.user);
+      return result;
       }
 
 }
