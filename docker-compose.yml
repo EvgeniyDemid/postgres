@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+
+  postgres:
+    build: .
+    environment:
+      - DATABASE=${DATABASE}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_USER=${DATABASE_USER}
+      - JWT_SECRET=${JWT_SECRET}
+    ports:
+      - ${DATABASE_PORT}:4000
+    restart: always
+
+
