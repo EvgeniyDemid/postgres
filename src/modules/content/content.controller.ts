@@ -15,11 +15,12 @@ export class ContentController {
   showAllContent(): Promise<ResponsContentDto[]> {
     return this.contentservice.showAllContent();
   }
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   showOneContent(@Param('id',ParseIntPipe) id:number): Promise<ResponsContentDto> {
     return this.contentservice.showOneContent(id);
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createContent(
     @Body() data: CreateContentDto ): Promise<ResponsContentDto> {
@@ -27,12 +28,12 @@ export class ContentController {
       
     return this.contentservice.create(data);
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   updateContent(@Param('id',ParseIntPipe) id:number, @Body() data: UpdateContentDto ) {
       return this.contentservice.update(id,data)
   }
-
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   deleteContent(@Param('id',ParseIntPipe) id:number) {
       return this.contentservice.delete(id)
