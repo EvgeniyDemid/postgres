@@ -5,14 +5,9 @@ services:
   postgres:
     build: .
     environment:
-      - DATABASE=${DATABASE}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_USER=${DATABASE_USER}
-      - JWT_SECRET=${JWT_SECRET}
+      - JWT_SECRET=secret
     ports:
-      - ${DATABASE_PORT}:4000
+      - ${PORT}:4000
     restart: always
 
 

@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  database:
+    image: postgres:latest
+    container_name: ${CONTAINER_NAME:-postgres-db}
+    restart: always
+    ports:
+        - ${DB_PORT:-4444}:${DOCKER_PORT_DB:-5432}
+    environment:
+        - POSTGRES_USER=${DB_USER:-postgres}
+        - POSTGRES_PASSWORD=${DB_PASS:-password}
+        - POSTGRES_DB=${DB_NAME:-fitually}
+  

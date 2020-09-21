@@ -6,6 +6,7 @@ import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { HttpErrorFilter } from './shared/errors/http-error-filter';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { LoggerModule } from './modules/Loger/LoggerModule';
 
 
 @Module({
@@ -14,7 +15,8 @@ import { AuthModule } from './modules/auth/auth.module';
     DatabaseModule,
     ContentModule,
     UsersModule,
-    AuthModule
+    AuthModule,
+    LoggerModule
   ],
   controllers: [],
 providers: [

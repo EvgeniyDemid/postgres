@@ -3,6 +3,9 @@ import { RowEntity } from "src/shared/Entity/row.entity";
 
 @Entity({name:'user'})
 export class UserEntity extends RowEntity<UserEntity>{
+    toObject(): any {
+      throw new Error('Method not implemented.');
+    }
     @Column({unique:true, nullable: true, default: null, type: "varchar", length: 255 })
     email: string;
     @Column({nullable: true, default: null, type: 'varchar', length: 255})

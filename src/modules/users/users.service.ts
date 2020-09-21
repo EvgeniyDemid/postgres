@@ -5,13 +5,16 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './userDto/createUserDto';
 import * as bcrypt from 'bcrypt';
 import {merge} from 'lodash';
+import { MyLogger } from '../Loger/loger.service';
 
 @Injectable()
 export class UsersService {
   constructor(
+    private myLogger: MyLogger,
     @InjectRepository(UserEntity)
     private userRepository: Repository<UserEntity>
-  ) {}
+    
+  ) {this.myLogger.setContext('UserService')}
 
   async create(data: CreateUserDto): Promise<UserEntity> {
     const { password, email, ...rest } = data;
@@ -33,8 +36,10 @@ export class UsersService {
   }
 
   async showAll():Promise<UserEntity[]>{
-   return this.userRepository.find();
-    return await this.userRepository.find()
+   const users = await this.userRepository.find();
+   this.myLogger.warn(`Get all user : ${users.map(user=>JSON.stringify(user))}`);
+   return users;
+   
   }
 
   async showOne(id:number): Promise<UserEntity> {
@@ -46,7 +51,8 @@ export class UsersService {
         'Пользователь не найден ',
         HttpStatus.CONFLICT,
       );
-    } return user
+    } this.myLogger.warn(`Get user by id ${id} : ${JSON.stringify(user)}`)
+     return user
   }
 
   async update(id:number, createUserDto: CreateUserDto){
