@@ -17,9 +17,15 @@ export class DatabaseService implements TypeOrmOptionsFactory  {
         username: this.configService.get('DATABASE_USER') ,
         password: this.configService.get('DATABASE_PASSWORD'),
         database: this.configService.get('DATABASE'),
-        synchronize: true,
+        dropSchema: false,
+        synchronize: false,
+        migrationsRun:true,
         //logging: true,
         entities: ["dist/**/*.entity{.ts,.js}"],
+        migrations:['dist/**/db/migration/*{.ts,.js}'],
+        cli:{
+            migrationsDir: '/db/migration'
+        }
        } 
     }
 
