@@ -23,10 +23,10 @@ export class DatabaseService implements TypeOrmOptionsFactory  {
         entities: ["dist/**/*.entity{.ts,.js}"],
         migrationsRun:true,
         logging: true,
-        migrations:[process.cwd() + '/src/modules/database/migration/*.ts'],
-        //cli:{
-         //   migrationsDir: '/db/migration'
-        //}
+        migrations:["dist/**/migration/*{.js,.ts}"],
+       // cli:{
+       //     migrationsDir: 'src/modules/database/migration'
+       // }
        } 
     }
 
