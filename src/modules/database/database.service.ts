@@ -10,6 +10,7 @@ export class DatabaseService implements TypeOrmOptionsFactory  {
         
     }
     createTypeOrmOptions(): TypeOrmModuleOptions {
+        console.log(process.cwd() + '/src/modules/database/migration/*.ts')
        return {
         type: 'postgres',
         host: this.configService.get('DATABASE_HOST'),
@@ -19,13 +20,13 @@ export class DatabaseService implements TypeOrmOptionsFactory  {
         database: this.configService.get('DATABASE'),
         dropSchema: false,
         synchronize: false,
-        migrationsRun:true,
-        //logging: true,
         entities: ["dist/**/*.entity{.ts,.js}"],
-        migrations:['dist/**/db/migration/*{.ts,.js}'],
-        cli:{
-            migrationsDir: '/db/migration'
-        }
+        migrationsRun:true,
+        logging: true,
+        migrations:[process.cwd() + '/src/modules/database/migration/*.ts'],
+        //cli:{
+         //   migrationsDir: '/db/migration'
+        //}
        } 
     }
 

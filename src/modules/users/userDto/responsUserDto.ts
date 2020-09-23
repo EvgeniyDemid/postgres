@@ -17,6 +17,6 @@ export class ResponsUserDto extends PrimaryRowDto {
   @Expose()
   city: string;
 
-  @Expose()
+  @Expose(/*{name: 'phoneNumber'}*/)
   phone: string;
 }
