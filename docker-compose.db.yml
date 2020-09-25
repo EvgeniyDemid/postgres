@@ -11,5 +11,5 @@ services:
     environment:
         - POSTGRES_USER=${DB_USER:-postgres}
         - POSTGRES_PASSWORD=${DB_PASS:-password}
-        - POSTGRES_DB=${DB_NAME:-fitually}
+        - POSTGRES_DB=${DB_NAME:-postgres}
   
