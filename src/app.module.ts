@@ -7,7 +7,7 @@ import { HttpErrorFilter } from './shared/errors/http-error-filter';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { LoggerModule } from './modules/Loger/LoggerModule';
-import { AppGeteway } from './modules/users/geteway';
+
 
 
 @Module({
@@ -20,7 +20,7 @@ import { AppGeteway } from './modules/users/geteway';
     LoggerModule
   ],
   controllers: [],
-providers: [AppGeteway,
+providers: [
 //   {
 //   provide: APP_FILTER,
 //   useClass: HttpErrorFilter

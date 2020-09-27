@@ -3,6 +3,7 @@ import { ContentService } from './content.service';
 import { ContentController } from './content.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ContentEntity } from './entities.ts/comtent.entity';
+import { AppGeteway } from './geteway';
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import { ContentEntity } from './entities.ts/comtent.entity';
     ])
   ],
   controllers: [ContentController],
-  providers: [ContentService]
+  providers: [ContentService,AppGeteway]
 })
 export class ContentModule {}

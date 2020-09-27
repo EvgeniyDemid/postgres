@@ -4,10 +4,12 @@ import { ContentEntity } from './entities.ts/comtent.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateContentDto } from './Dto/create-content.dto';
 import {merge} from 'lodash';
+import { AppGeteway } from './geteway';
 
 @Injectable()
 export class ContentService {
-    constructor (@InjectRepository(ContentEntity) private contentRepository: Repository<ContentEntity>){}
+    constructor (@InjectRepository(ContentEntity) private contentRepository: Repository<ContentEntity>,
+    private readonly appGeteway: AppGeteway ){}
     
     async showAllContent(){
         return await this.contentRepository.find(
@@ -25,6 +27,7 @@ export class ContentService {
     async create(data: CreateContentDto){
         const content = await this.contentRepository.save(data);
         const {discription, ...result } = content;
+        this.appGeteway.wss.emit('newcontent', discription)
         return result;
     }
 
