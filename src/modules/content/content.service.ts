@@ -1,4 +1,4 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { Injectable, HttpException, HttpStatus, Logger } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { ContentEntity } from './entities.ts/comtent.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,6 +11,8 @@ export class ContentService {
     constructor (@InjectRepository(ContentEntity) private contentRepository: Repository<ContentEntity>,
     private readonly appGeteway: AppGeteway ){}
     
+    private logger = new Logger("ContentService");
+
     async showAllContent(){
         return await this.contentRepository.find(
             {select:['id', "avtor"]}
@@ -28,6 +30,7 @@ export class ContentService {
         const content = await this.contentRepository.save(data);
         const {discription, ...result } = content;
         this.appGeteway.wss.emit('newcontent', discription)
+        this.logger.log("send by socket",discription)
         return result;
     }
 
