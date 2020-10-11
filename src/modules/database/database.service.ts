@@ -10,7 +10,6 @@ export class DatabaseService implements TypeOrmOptionsFactory  {
         
     }
     createTypeOrmOptions(): TypeOrmModuleOptions {
-        console.log(process.cwd() + '/src/modules/database/migration/*.ts')
        return {
         type: 'postgres',
         host: this.configService.get('DATABASE_HOST'),
