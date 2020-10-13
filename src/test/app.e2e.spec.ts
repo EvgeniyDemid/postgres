@@ -7,6 +7,11 @@ import { DatabaseModule } from '../../src/modules/database/database.module';
 import { UsersModule } from '../../src/modules/users/users.module';
 import { AppModule } from '../../src/app.module';
 import { AppController } from '../../src/app.controller';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { createConnection, Repository } from 'typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { UserEntity } from '../modules/users/entities/user.entity';
+import { DatabaseService } from 'src/modules/database/database.service';
 
 
 const user: CreateUserDto ={
@@ -25,13 +30,28 @@ describe('Bootstrap', () => {
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [AppController],
+      imports: [
+      ],
+      controllers:[AppController],
+      providers:[]
+
     })
       .compile();
 
     app = moduleRef.createNestApplication();
     await app.init();
-    console.log("app!!!!!",app)
+   const connection = await createConnection({
+      type: 'postgres',
+      host: 'localhost',
+      port: 5432,
+      username: 'postgres',
+      password: '1902',
+      database: 'postgres',
+
+    });
+   const db= await connection.query('select * from "user" where id= 1')
+   console.log(db)
+   await connection.close();
   });
  
 

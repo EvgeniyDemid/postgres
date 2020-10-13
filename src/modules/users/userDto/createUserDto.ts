@@ -5,7 +5,7 @@ import {
   Matches,
   IsOptional,
 } from 'class-validator';
-import { PrimaryRowDto } from 'src/shared/dto/primary-row.dto';
+import { PrimaryRowDto } from '../../../shared/dto/primary-row.dto';
 
 export class CreateUserDto extends PrimaryRowDto {
   @IsNotEmpty({ message: 'Поле email обязательно для заполнения' })

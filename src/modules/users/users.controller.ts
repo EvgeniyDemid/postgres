@@ -2,8 +2,8 @@ import { Controller, Post, Body, Get, Put, Param, ParseIntPipe, Delete } from '@
 import { UsersService } from './users.service';
 import { CreateUserDto } from './userDto/createUserDto';
 import { ResponsUserDto } from './userDto/responsUserDto';
-import { ValidationPipe } from 'src/shared/validation/validation.pipe';
-import { mapToResponseDto } from 'src/shared/function/map-to-response-dto';
+import { ValidationPipe } from '../../shared/validation/validation.pipe';
+import { mapToResponseDto } from '../../shared/function/map-to-response-dto';
 
 @Controller('users')
 export class UsersController {

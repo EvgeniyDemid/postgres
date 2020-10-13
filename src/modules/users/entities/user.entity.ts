@@ -1,5 +1,5 @@
 import { Entity, Column } from "typeorm";
-import { RowEntity } from "src/shared/Entity/row.entity";
+import { RowEntity } from "../../../shared/Entity/row.entity";
 
 @Entity({name:'user'})
 export class UserEntity extends RowEntity<UserEntity>{

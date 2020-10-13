@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { PrimaryRowDto } from 'src/shared/dto/primary-row.dto';
+import { PrimaryRowDto } from '../../../shared/dto/primary-row.dto';
 
 export class ResponsUserDto extends PrimaryRowDto {
   @Expose()
