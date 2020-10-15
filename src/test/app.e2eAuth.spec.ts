@@ -6,8 +6,8 @@ import {  createConnection } from "typeorm";
 
 describe('User',()=>{
   let app= 'http://localhost:4000';
-  let userid;
-  
+  let accessToken : string;
+
   const user: CreateUserDto ={
     email:'test@test.ru',
     password:'We67!qwqw233DDF@}',
@@ -18,6 +18,7 @@ describe('User',()=>{
     country:'country',
     phone:'79278753544'
   };
+
 
   
   beforeAll(async()=>{
@@ -49,10 +50,34 @@ describe('User',()=>{
         expect(body.city).toEqual(user.city)
         expect(body.phone).toEqual(user.phone)
         expect(body.password).toBeUndefined()
-        userid=body.id
       })
       .expect(HttpStatus.CREATED);
+    })
+    it("Auth",()=>{
+
+      return request(app)
+      .post('/auth')
+      .set('Content-Type','application/json')
+      .send({email:user.email,
+        password:user.password})
+      .expect(({body})=>{
+        expect(body.id).toBeDefined()
+        expect(body.email).toEqual(user.email)
+        expect(body.accessToken).toBeDefined()
+        accessToken = body.accessToken;
+        console.log(accessToken)
+      })
+      .expect(HttpStatus.CREATED);
+    })
+    it("Get content",()=>{
+      return request(app)
+      .get('/content')
+      .set('Content-Type','application/json')
+      .set('access_Token',`${accessToken}`)
+      .expect(({body})=>{
     
-    
+      })
+      .expect(HttpStatus.OK);
+      
     })
 });
