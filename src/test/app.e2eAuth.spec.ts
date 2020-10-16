@@ -80,4 +80,11 @@ describe('User',()=>{
       .expect(HttpStatus.OK);
       
     })
+    it("Unauthorized",()=>{
+      return request(app)
+      .get('/content')
+      .set('Content-Type','application/json')
+      .expect(HttpStatus.UNAUTHORIZED);
+      
+    })
 });
